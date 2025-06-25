@@ -4,7 +4,6 @@ from .Validate import Validate
 
 class CTkLine:
     current_usable_id = 1
-    
     def __init__(
             self,
             master: any = None,
@@ -17,7 +16,8 @@ class CTkLine:
             point_highlight_color: Union[Tuple[str, str], str] = ("#768df1", "#768df1"),
             fill: Literal["enabled", "disabled"] = "disabled",
             fill_color: Union[Tuple[str, str], str] = ("#bdc6ed", "#5d6db6"),
-            *args: any) -> None:
+            *args: any
+    ) -> None:
         """
         Initialize a CTkLine object.
 
@@ -32,24 +32,26 @@ class CTkLine:
             point_highlight_color (Union[Tuple[str, str], str]): The color of points used for highlighting.
             fill (str): Whether fill for the line is enabled or disabled.
             fill_color (Union[Tuple[str, str], str]): The color of the fill for the line.
+        Raises:
+            TypeError: If any of the parameters are of an incorrect type.
+            ValueError: If any of the parameters are invalid.
         """
-
         if master is None:
             if len(args) != 0:
                 master = args[0]
             else:
-                Validate._MasterAttNotProvideForLine("master")
+                Validate._master_att_not_provide_for_line("master")
 
-        Validate._isValidCTkLineChart(master, "master")
-        Validate._isValidColor(color, "color")
-        Validate._isInt(size, "size")
-        Validate._isValidLineStyle(style, "style")
-        Validate._isValidStyleType(style_type, "style_type")
-        Validate._isValidLineHighlight(point_highlight, "point_highlight")
-        Validate._isInt(point_highlight_size, "point_highlight_size")
-        Validate._isValidColor(point_highlight_color, "point_highlight_color")
-        Validate._isValidLineFill(fill, "fill")
-        Validate._isValidColor(fill_color, "fill_color")
+        Validate._is_valid_ctk_line_chart(master, "master")
+        Validate._is_valid_color(color, "color")
+        Validate._is_int(size, "size")
+        Validate._is_valid_line_style(style, "style")
+        Validate._is_valid_style_type(style_type, "style_type")
+        Validate._is_valid_line_highlight(point_highlight, "point_highlight")
+        Validate._is_int(point_highlight_size, "point_highlight_size")
+        Validate._is_valid_color(point_highlight_color, "point_highlight_color")
+        Validate._is_valid_line_fill(fill, "fill")
+        Validate._is_valid_color(fill_color, "fill_color")
 
         # id (int): The id of the line. need  unique
         self.__id = CTkLine.current_usable_id
@@ -84,7 +86,8 @@ class CTkLine:
             point_highlight_size: int = None,
             point_highlight_color: Union[Tuple[str, str], str] = None,
             fill: Literal["enabled", "disabled"] = None,
-            fill_color: Union[Tuple[str, str], str] = None) -> None:
+            fill_color: Union[Tuple[str, str], str] = None
+    ) -> None:
         """
         Configure attributes of the CTkLine object.
 
@@ -98,52 +101,55 @@ class CTkLine:
             point_highlight_color (Union[Tuple[str, str], str]): The color of points used for highlighting.
             fill (str): Whether fill for the line is enabled or disabled.
             fill_color (Union[Tuple[str, str], str]): The color of the fill for the line.
+        
+        Raises:
+            TypeError: If any of the parameters are of an incorrect type.
+            ValueError: If any of the parameters are invalid.
         """
-
         changes_req = False
 
         if color is not None:
-            Validate._isValidColor(color, "color")
+            Validate._is_valid_color(color, "color")
             self.__color = color
             changes_req = True
 
         if size is not None:
-            Validate._isInt(size, "size")
+            Validate._is_int(size, "size")
             self.__size = size
             changes_req = True
 
         if style is not None:
-            Validate._isValidLineStyle(style, "style")
+            Validate._is_valid_line_style(style, "style")
             self.__style = style
             changes_req = True
 
         if style_type is not None:
-            Validate._isValidStyleType(style_type, "style_type")
+            Validate._is_valid_style_type(style_type, "style_type")
             self.__style_type = style_type
             changes_req = True
 
         if point_highlight is not None:
-            Validate._isValidLineHighlight(point_highlight, "point_highlight")
+            Validate._is_valid_line_highlight(point_highlight, "point_highlight")
             self.__point_highlight = point_highlight
             changes_req = True
 
         if point_highlight_size is not None:
-            Validate._isInt(point_highlight_size, "point_highlight_size")
+            Validate._is_int(point_highlight_size, "point_highlight_size")
             self.__point_highlight_size = point_highlight_size
             changes_req = True
 
         if point_highlight_color is not None:
-            Validate._isValidColor(point_highlight_color, "point_highlight_color")
+            Validate._is_valid_color(point_highlight_color, "point_highlight_color")
             self.__point_highlight_color = point_highlight_color
             changes_req = True
 
         if fill is not None:
-            Validate._isValidLineFill(fill, "fill")
+            Validate._is_valid_line_fill(fill, "fill")
             self.__fill = fill
             changes_req = True
 
         if fill_color is not None:
-            Validate._isValidColor(fill_color, "fill_color")
+            Validate._is_valid_color(fill_color, "fill_color")
             self.__fill_color = fill_color
             changes_req = True
 
@@ -151,13 +157,18 @@ class CTkLine:
             self.__master._CTkLineChart__apply_line_configuration()
             
     def get_id(self) -> int:
+        """
+        Get the unique identifier of the CTkLine object.
+        
+        Returns:
+            int: The unique identifier of the line.
+        """
         return self.__id
 
     def __reset_positions(self) -> None:
         """
         Reset the CTkLine object.
         """
-       
         self.__y_end = 0
         self.__x_end = self.__master._CTkLineChart__x_axis_point_spacing * -1
         
@@ -183,14 +194,7 @@ class CTkLine:
 
         Returns:
             None: This method modifies the internal state of the data but does not return any value.
-
-        Example:
-            line.clear_data()
-        
-        In this example, the data is cleaned up to ensure that only the most recent visible data 
-        points are kept, improving the rendering performance and reducing memory usage.
         """
-        
         maximum_data = self.__master._CTkLineChart__get_max_data_length_across_lines()
         max_visible_points = self.__master._CTkLineChart__get_max_visible_data_points()
         
@@ -209,7 +213,6 @@ class CTkLine:
         Returns:
             Tuple[int | float]: A tuple of data points from the specified range and step.
         """
-        
         return tuple(self.__data[start: end: step])
     
     def get_current_visible_data(self) -> Tuple[int | float]:
@@ -221,9 +224,8 @@ class CTkLine:
 
         Returns:
             Tuple[int | float]: A tuple of currently visible data points.
-                                If no data is visible, an empty tuple is returned.
+                If no data is visible, an empty tuple is returned.
         """
-        
         maximum_data = self.__master._CTkLineChart__get_max_data_length_across_lines()
         max_visible_points = self.__master._CTkLineChart__get_max_visible_data_points()
         
@@ -241,7 +243,6 @@ class CTkLine:
         Returns:
             int: The maximum number of visible data points on the X-axis.
         """
-        
         return self.__master.get_x_axis_visible_point_count()    
             
     def reset(self) -> None:
@@ -258,9 +259,11 @@ class CTkLine:
 
         Args:
             state (bool): True if the line should be visible, False otherwise.
-        """
         
-        Validate._isBool(state, "state")
+        Raises:
+            TypeError: If the state is not a boolean.
+        """
+        Validate._is_bool(state, "state")
         if self.__visibility != state:
             self.__visibility = state
             self.__master._CTkLineChart__apply_line_configuration()
@@ -270,7 +273,9 @@ class CTkLine:
             attribute_name: Literal[
                 "master", "color", "size", "style", "style_type", "point_highlight",
                 "point_highlight_size", "point_highlight_color", "fill", "fill_color",
-                "__all__"]) -> any:
+                "__all__"
+            ] = "__all__"
+    ) -> any:
         """
         Get the value of a CTkLine attribute.
 
@@ -279,30 +284,31 @@ class CTkLine:
 
         Returns:
             any: Value of the attribute.
+        
+        Raises:
+            ValueError: If the attribute name is invalid.
         """
-
         if attribute_name == "master":
             return self.__master
-        if attribute_name == "color":
+        elif attribute_name == "color":
             return self.__color
-        if attribute_name == "size":
+        elif attribute_name == "size":
             return self.__size
-        if attribute_name == "style":
+        elif attribute_name == "style":
             return self.__style
-        if attribute_name == "style_type":
+        elif attribute_name == "style_type":
             return self.__style_type
-        if attribute_name == "point_highlight":
+        elif attribute_name == "point_highlight":
             return self.__point_highlight
-        if attribute_name == "point_highlight_size":
+        elif attribute_name == "point_highlight_size":
             return self.__point_highlight_size
-        if attribute_name == "point_highlight_color":
+        elif attribute_name == "point_highlight_color":
             return self.__point_highlight_color
-        if attribute_name == "fill":
+        elif attribute_name == "fill":
             return self.__fill
-        if attribute_name == "fill_color":
+        elif attribute_name == "fill_color":
             return self.__fill_color
-
-        if attribute_name == "__all__":
+        elif attribute_name == "__all__":
             return {
                 "master": self.__master,
                 "color": self.__color,
@@ -315,7 +321,8 @@ class CTkLine:
                 "fill": self.__fill,
                 "fill_color": self.__fill_color
             }
-        Validate._invalidCget(attribute_name)
+        else:
+            Validate._invalid_cget(attribute_name)
 
     def get_visibility(self) -> bool:
         """
@@ -324,7 +331,6 @@ class CTkLine:
         Returns:
             bool: True if the line is visible, False otherwise.
         """
-
         return self.__visibility
 
     def __del__(self) -> None:

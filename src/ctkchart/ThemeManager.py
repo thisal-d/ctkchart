@@ -1,53 +1,80 @@
 import customtkinter as ctk
 import time
-from typing import List, Tuple, Any, Union
 import threading
+from typing import List, Tuple, Any, Union
 
 
 class ThemeManager:
-    running_state = False
-    child_objects: List = []
+    running_state: bool = False
+    child_objects: List[Any] = []
     theme: str = "-"
 
     @staticmethod
-    def get_color_by_theme(color_s: Union[Tuple[str, str], str]) -> str:
-        if type(color_s) is tuple:
-            if ThemeManager.theme == "Light":
-                return color_s[0]
-            else:
-                return color_s[1]
-        else:
-            return color_s
+    def get_color_by_theme(color: Union[Tuple[str, str], str]) -> str:
+        """
+        Returns the appropriate color based on the current theme.
+
+        Args:
+            color (Tuple[str, str] | str): A tuple of (light_color, dark_color) or a single color string.
+
+        Returns:
+            str: The color corresponding to the current theme.
+        """
+        if isinstance(color, tuple):
+            return color[0] if ThemeManager.theme == "Light" else color[1]
+        return color
 
     @staticmethod
     def theme_tracker() -> None:
-        while len(ThemeManager.child_objects) != 0:
-            if ctk.get_appearance_mode() != ThemeManager.theme:
-                ThemeManager.theme = ctk.get_appearance_mode()
-                for child_object in ThemeManager.child_objects:
+        """
+        Monitors and applies theme changes across all registered widgets.
+        """
+        while ThemeManager.child_objects:
+            current_theme = ctk.get_appearance_mode()
+            if current_theme != ThemeManager.theme:
+                ThemeManager.theme = current_theme
+                for widget in ThemeManager.child_objects:
                     try:
-                        child_object._CTkLineChart__configure_theme_mode()
-                    except Exception as error:
-                        print(f"Line Chart theme configure failed : {error}")
-                        
+                        widget._CTkLineChart__configure_theme_mode()
+                    except Exception as e:
+                        print(f"[ThemeManager] Theme update failed for widget: {e}")
             time.sleep(1)
+
         ThemeManager.running_state = False
 
     @staticmethod
-    def run():
-        ThemeManager.running_state = True
-        thread = threading.Thread(target=ThemeManager.theme_tracker)
-        thread.daemon = True
-        thread.start()
-    
+    def run() -> None:
+        """
+        Starts the background theme tracking thread if not already running.
+        """
+        if not ThemeManager.running_state:
+            ThemeManager.running_state = True
+            thread = threading.Thread(target=ThemeManager.theme_tracker, daemon=True)
+            thread.start()
+
     @staticmethod
     def bind_widget(widget: Any) -> None:
+        """
+        Registers a widget with the theme manager.
+
+        Args:
+            widget (Any): Widget instance with a `_CTkLineChart__configure_theme_mode` method.
+        """
         ThemeManager.child_objects.append(widget)
+        if not ThemeManager.running_state:
+            ThemeManager.run()
 
     @staticmethod
     def unbind_widget(widget: Any) -> None:
+        """
+        Unregisters a widget from the theme manager.
+
+        Args:
+            widget (Any): The widget to remove.
+        """
         try:
             ThemeManager.child_objects.remove(widget)
-        except Exception as error:
-            print(f"Unable to remove widgets from Theme Manager : {error}")
-        
+        except ValueError:
+            print(f"[ThemeManager] Widget not found.")
+        except Exception as e:
+            print(f"[ThemeManager] Error removing widget: {e}")
