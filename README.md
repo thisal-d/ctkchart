@@ -19,7 +19,7 @@
 
 ---
 
-https://github.com/Thisal-D/tkchart/assets/93121062/6f1e844f-d51c-467a-a3dc-ee03fea78fc9
+https://github.com/user-attachments/assets/63da0c36-b426-4744-9f16-1c4d93f3b07b
 
 ---
 
