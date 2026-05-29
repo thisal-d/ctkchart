@@ -2457,3 +2457,397 @@ class CTkLineChart:
             line.destroy()
 
         self.__del__()
+
+    # -------------------------------------------------------------------------
+    # Individual configure methods (added below; existing code is unchanged)
+    # Each method is a thin, focused wrapper around configure() so all
+    # validation, change-detection, and redraw logic stays in one place.
+    # -------------------------------------------------------------------------
+
+    def configure_width(self, width: int) -> None:
+        """
+        Configure the width of the chart.
+
+        Args:
+            width (int): New width in pixels. Triggers a full chart reset/redraw.
+        """
+        self.configure(width=width)
+
+    def configure_height(self, height: int) -> None:
+        """
+        Configure the height of the chart.
+
+        Args:
+            height (int): New height in pixels. Triggers a full chart reset/redraw.
+        """
+        self.configure(height=height)
+
+    def configure_axis_size(self, axis_size: int) -> None:
+        """
+        Configure the thickness (in pixels) of the x-axis and y-axis lines.
+
+        Args:
+            axis_size (int): New axis line thickness. Triggers a full chart reset/redraw.
+        """
+        self.configure(axis_size=axis_size)
+
+    def configure_x_axis_point_spacing(self, x_axis_point_spacing: Union[int, float, Literal["auto"]]) -> None:
+        """
+        Configure the pixel spacing between consecutive data points on the x-axis.
+
+        Args:
+            x_axis_point_spacing (Union[int, float, "auto"]): Spacing value or "auto"
+                to calculate it automatically from the chart width. Triggers a data reshow.
+        """
+        self.configure(x_axis_point_spacing=x_axis_point_spacing)
+
+    def configure_fg_color(self, fg_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the foreground (canvas background) color of the chart plot area.
+
+        Args:
+            fg_color (Union[Tuple[str, str], str]): Color string or (light, dark) tuple.
+                Triggers a widget color update.
+        """
+        self.configure(fg_color=fg_color)
+
+    def configure_axis_color(self, axis_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the color of the axis lines.
+
+        Args:
+            axis_color (Union[Tuple[str, str], str]): Color string or (light, dark) tuple.
+                Triggers a widget color update.
+        """
+        self.configure(axis_color=axis_color)
+
+    def configure_bg_color(self, bg_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the background color of the chart frame and label areas.
+
+        Args:
+            bg_color (Union[Tuple[str, str], str]): Color string or (light, dark) tuple.
+                Triggers a widget color update.
+        """
+        self.configure(bg_color=bg_color)
+
+    def configure_data_font_style(self, data_font_style: Tuple[str, int, str]) -> None:
+        """
+        Configure the font style for axis data labels (e.g. the "X" / "Y" header labels).
+
+        Args:
+            data_font_style (Tuple[str, int, str]): Font tuple (family, size, weight).
+                Triggers a full chart reset/redraw.
+        """
+        self.configure(data_font_style=data_font_style)
+
+    def configure_axis_font_style(self, axis_font_style: Tuple[str, int, str]) -> None:
+        """
+        Configure the font style for axis tick value labels.
+
+        Args:
+            axis_font_style (Tuple[str, int, str]): Font tuple (family, size, weight).
+                Triggers a full chart reset/redraw.
+        """
+        self.configure(axis_font_style=axis_font_style)
+
+    def configure_y_axis_values(self, y_axis_values: Tuple[Union[int, float], Union[int, float]]) -> None:
+        """
+        Configure the value range displayed on the y-axis.
+
+        Args:
+            y_axis_values (Tuple[min, max]): A two-element tuple with the minimum and
+                maximum y-axis values. Triggers a full chart reset/redraw.
+        """
+        self.configure(y_axis_values=y_axis_values)
+
+    def configure_y_axis_precision(self, y_axis_precision: int) -> None:
+        """
+        Configure the decimal precision used when formatting y-axis label values.
+
+        Args:
+            y_axis_precision (int): Number of decimal places. Triggers a full chart reset/redraw.
+        """
+        self.configure(y_axis_precision=y_axis_precision)
+
+    def configure_y_axis_font_color(self, y_axis_font_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the font color for y-axis tick value labels.
+
+        Args:
+            y_axis_font_color (Union[Tuple[str, str], str]): Color string or (light, dark) tuple.
+                Triggers a widget color update.
+        """
+        self.configure(y_axis_font_color=y_axis_font_color)
+
+    def configure_y_axis_data_font_color(self, y_axis_data_font_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the font color for the y-axis header/data label.
+
+        Args:
+            y_axis_data_font_color (Union[Tuple[str, str], str]): Color string or
+                (light, dark) tuple. Triggers a widget color update.
+        """
+        self.configure(y_axis_data_font_color=y_axis_data_font_color)
+
+    def configure_y_axis_section_count(self, y_axis_section_count: int) -> None:
+        """
+        Configure the number of horizontal section divider lines drawn on the chart.
+
+        Args:
+            y_axis_section_count (int): Number of y-axis sections. Triggers sections rebuild.
+        """
+        self.configure(y_axis_section_count=y_axis_section_count)
+
+    def configure_y_axis_section_color(self, y_axis_section_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the color of horizontal section divider lines on the chart.
+
+        Args:
+            y_axis_section_color (Union[Tuple[str, str], str]): Color string or
+                (light, dark) tuple. Triggers sections color rebuild.
+        """
+        self.configure(y_axis_section_color=y_axis_section_color)
+
+    def configure_y_axis_section_style(self, y_axis_section_style: Literal["normal", "dashed"]) -> None:
+        """
+        Configure the drawing style for horizontal section divider lines.
+
+        Args:
+            y_axis_section_style (Literal["normal", "dashed"]): Either "normal" (solid)
+                or "dashed". Triggers sections rebuild.
+        """
+        self.configure(y_axis_section_style=y_axis_section_style)
+
+    def configure_y_axis_section_style_type(self, y_axis_section_style_type: Tuple[int, int]) -> None:
+        """
+        Configure the dash-width / gap-width tuple for dashed y-axis section lines.
+
+        Args:
+            y_axis_section_style_type (Tuple[int, int]): (dash_width, gap_width) in pixels.
+                Triggers sections rebuild.
+        """
+        self.configure(y_axis_section_style_type=y_axis_section_style_type)
+
+    def configure_y_axis_label_count(self, y_axis_label_count: int) -> None:
+        """
+        Configure how many value tick labels are drawn along the y-axis.
+
+        Args:
+            y_axis_label_count (int): Number of y-axis tick labels. If changing to/from 0
+                a full chart reset is performed; otherwise only labels are rebuilt.
+        """
+        self.configure(y_axis_label_count=y_axis_label_count)
+
+    def configure_y_axis_data(self, y_axis_data: Any) -> None:
+        """
+        Configure the header label text shown for the y-axis.
+
+        Args:
+            y_axis_data (Any): Label text (converted to str internally).
+                Triggers a full chart reset/redraw.
+        """
+        self.configure(y_axis_data=y_axis_data)
+
+    def configure_y_axis_data_position(self, y_axis_data_position: Literal["top", "side"]) -> None:
+        """
+        Configure where the y-axis header label is placed.
+
+        Args:
+            y_axis_data_position (Literal["top", "side"]): "top" places the label above
+                the chart; "side" places it vertically beside the y-axis.
+                Triggers a full chart reset/redraw.
+        """
+        self.configure(y_axis_data_position=y_axis_data_position)
+
+    def configure_y_space(self, y_space: int) -> None:
+        """
+        Configure extra vertical padding (in pixels) added between the top of the plot
+        area and the first drawn data point.
+
+        Args:
+            y_space (int): Additional vertical space. Triggers a full chart reset/redraw.
+        """
+        self.configure(y_space=y_space)
+
+    def configure_x_axis_values(self, x_axis_values: Tuple[Any, ...]) -> None:
+        """
+        Configure the sequence of label values associated with each x-axis data point.
+
+        Args:
+            x_axis_values (Tuple[Any, ...]): Ordered label values. If the length or the
+                maximum rendered label width changes, a full reset is performed; otherwise
+                only the label texts are updated.
+        """
+        self.configure(x_axis_values=x_axis_values)
+
+    def configure_x_axis_data(self, x_axis_data: Any) -> None:
+        """
+        Configure the header label text shown for the x-axis.
+
+        Args:
+            x_axis_data (Any): Label text (converted to str internally).
+                Triggers a full chart reset/redraw.
+        """
+        self.configure(x_axis_data=x_axis_data)
+
+    def configure_x_axis_font_color(self, x_axis_font_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the font color for x-axis tick value labels.
+
+        Args:
+            x_axis_font_color (Union[Tuple[str, str], str]): Color string or (light, dark) tuple.
+                Triggers a widget color update.
+        """
+        self.configure(x_axis_font_color=x_axis_font_color)
+
+    def configure_x_axis_data_font_color(self, x_axis_data_font_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the font color for the x-axis header/data label.
+
+        Args:
+            x_axis_data_font_color (Union[Tuple[str, str], str]): Color string or
+                (light, dark) tuple. Triggers a widget color update.
+        """
+        self.configure(x_axis_data_font_color=x_axis_data_font_color)
+
+    def configure_x_axis_label_count(self, x_axis_label_count: int) -> None:
+        """
+        Configure how many value tick labels are drawn along the x-axis when using
+        label-count mode (as opposed to display-indices mode).
+
+        Args:
+            x_axis_label_count (int): Number of x-axis tick labels. If changing to/from 0
+                a full chart reset is performed; otherwise only x-axis labels are rebuilt.
+        """
+        self.configure(x_axis_label_count=x_axis_label_count)
+
+    def configure_x_axis_section_count(self, x_axis_section_count: int) -> None:
+        """
+        Configure the number of vertical section divider lines drawn on the chart.
+
+        Args:
+            x_axis_section_count (int): Number of x-axis sections. Triggers sections rebuild.
+        """
+        self.configure(x_axis_section_count=x_axis_section_count)
+
+    def configure_x_axis_section_style(self, x_axis_section_style: Literal["normal", "dashed"]) -> None:
+        """
+        Configure the drawing style for vertical section divider lines.
+
+        Args:
+            x_axis_section_style (Literal["normal", "dashed"]): Either "normal" (solid)
+                or "dashed". Triggers sections rebuild.
+        """
+        self.configure(x_axis_section_style=x_axis_section_style)
+
+    def configure_x_axis_section_style_type(self, x_axis_section_style_type: Tuple[int, int]) -> None:
+        """
+        Configure the dash-height / gap-height tuple for dashed x-axis section lines.
+
+        Args:
+            x_axis_section_style_type (Tuple[int, int]): (dash_height, gap_height) in pixels.
+                Triggers sections rebuild.
+        """
+        self.configure(x_axis_section_style_type=x_axis_section_style_type)
+
+    def configure_x_axis_section_color(self, x_axis_section_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the color of vertical section divider lines on the chart.
+
+        Args:
+            x_axis_section_color (Union[Tuple[str, str], str]): Color string or
+                (light, dark) tuple. Triggers sections color rebuild.
+        """
+        self.configure(x_axis_section_color=x_axis_section_color)
+
+    def configure_x_axis_display_values_indices(self, x_axis_display_values_indices: Tuple[int, ...]) -> None:
+        """
+        Configure which specific indices of x_axis_values are displayed as tick labels.
+        Switches the chart to "label_indices" mode.
+
+        Args:
+            x_axis_display_values_indices (Tuple[int, ...]): Zero-based indices into
+                x_axis_values that should have a visible label. Triggers x-axis labels rebuild.
+        """
+        self.configure(x_axis_display_values_indices=x_axis_display_values_indices)
+
+    def configure_x_axis_data_position(self, x_axis_data_position: Literal["top", "side"]) -> None:
+        """
+        Configure where the x-axis header label is placed.
+
+        Args:
+            x_axis_data_position (Literal["top", "side"]): "top" places the label to the
+                right of the chart; "side" places it below the x-axis.
+                Triggers a full chart reset/redraw.
+        """
+        self.configure(x_axis_data_position=x_axis_data_position)
+
+    def configure_x_space(self, x_space: int) -> None:
+        """
+        Configure extra horizontal padding (in pixels) added to the right edge of the
+        plot area.
+
+        Args:
+            x_space (int): Additional horizontal space. Triggers a full chart reset/redraw.
+        """
+        self.configure(x_space=x_space)
+
+    def configure_pointer_state(self, pointer_state: Literal["enabled", "disabled"]) -> None:
+        """
+        Enable or disable the interactive hover pointer on the chart.
+
+        Args:
+            pointer_state (Literal["enabled", "disabled"]): "enabled" binds mouse-motion
+                events; "disabled" unbinds them. Triggers pointer state update.
+        """
+        self.configure(pointer_state=pointer_state)
+
+    def configure_pointing_values_precision(self, pointing_values_precision: int) -> None:
+        """
+        Configure the decimal precision used when formatting values shown by the pointer.
+
+        Args:
+            pointing_values_precision (int): Number of decimal places for pointer values.
+        """
+        self.configure(pointing_values_precision=pointing_values_precision)
+
+    def configure_pointer_color(self, pointer_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the color of the vertical hover pointer line.
+
+        Args:
+            pointer_color (Union[Tuple[str, str], str]): Color string or (light, dark) tuple.
+                Triggers a widget color update.
+        """
+        self.configure(pointer_color=pointer_color)
+
+    def configure_pointer_lock(self, pointer_lock: Literal["enabled", "disabled"]) -> None:
+        """
+        Configure whether the pointer snaps to the nearest data point ("enabled") or
+        follows the cursor freely ("disabled").
+
+        Args:
+            pointer_lock (Literal["enabled", "disabled"]): Snap behaviour of the pointer.
+        """
+        self.configure(pointer_lock=pointer_lock)
+
+    def configure_pointing_callback_function(self, pointing_callback_function: Callable) -> None:
+        """
+        Configure the callback function that is called with (x_label, [y_values]) whenever
+        the pointer moves over the chart.
+
+        Args:
+            pointing_callback_function (Callable): A callable that accepts two positional
+                arguments: the current x-axis label and a list of formatted y values.
+        """
+        self.configure(pointing_callback_function=pointing_callback_function)
+
+    def configure_pointer_size(self, pointer_size: int) -> None:
+        """
+        Configure the pixel width of the vertical hover pointer line.
+
+        Args:
+            pointer_size (int): Width of the pointer in pixels. Triggers pointer size update.
+        """
+        self.configure(pointer_size=pointer_size)
