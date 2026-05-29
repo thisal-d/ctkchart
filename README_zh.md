@@ -4,6 +4,8 @@
 
 # ctkchart
 
+**用于在 CustomTkinter 中创建实时更新折线图的 Python 库。**
+
 [![PyPI version](https://badge.fury.io/py/ctkchart.svg)](https://pypi.org/project/ctkchart/)
 
 [![Downloads](https://static.pepy.tech/badge/ctkchart)](https://pepy.tech/project/ctkchart)
@@ -12,8 +14,6 @@
 [![Downloads/Week](https://static.pepy.tech/badge/ctkchart/week)](https://pepy.tech/project/ctkchart)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-
-**用于在 CustomTkinter 中创建实时更新折线图的 Python 库。**
 
 </div>
 

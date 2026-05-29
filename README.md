@@ -4,6 +4,8 @@
 
 # ctkchart
 
+**A Python library for creating live-updating line charts in CustomTkinter.**
+
 [![PyPI version](https://badge.fury.io/py/ctkchart.svg)](https://pypi.org/project/ctkchart/)
 
 [![Downloads](https://static.pepy.tech/badge/ctkchart)](https://pepy.tech/project/ctkchart)
@@ -12,8 +14,6 @@
 [![Downloads/Week](https://static.pepy.tech/badge/ctkchart/week)](https://pepy.tech/project/ctkchart)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-
-**A Python library for creating live-updating line charts in CustomTkinter.**
 
 </div>
 
