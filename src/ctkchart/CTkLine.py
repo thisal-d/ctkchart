@@ -366,3 +366,109 @@ class CTkLine:
             pass  # In case the line is not in the list
         finally:
             self.__del__()
+
+    # -------------------------------------------------------------------------
+    # Individual configure methods (added below; existing code is unchanged)
+    # Each is a thin wrapper around configure() so all validation and the
+    # redraw call (__apply_line_configuration) stay in one place.
+    # -------------------------------------------------------------------------
+
+    def configure_color(self, color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the stroke color of the line.
+
+        Args:
+            color (Union[Tuple[str, str], str]): A single hex color string or a
+                (light_mode_color, dark_mode_color) tuple. Triggers a chart redraw.
+        """
+        self.configure(color=color)
+
+    def configure_size(self, size: int) -> None:
+        """
+        Configure the stroke thickness of the line in pixels.
+
+        Args:
+            size (int): Thickness in pixels. Triggers a chart redraw.
+        """
+        self.configure(size=size)
+
+    def configure_style(self, style: Literal["normal", "dashed", "dotted"]) -> None:
+        """
+        Configure the drawing style of the line.
+
+        Args:
+            style (Literal["normal", "dashed", "dotted"]): Drawing mode.
+                "normal"  – solid connected line.
+                "dashed"  – alternating dash / gap segments.
+                "dotted"  – circles drawn along the path.
+                Triggers a chart redraw.
+        """
+        self.configure(style=style)
+
+    def configure_style_type(self, style_type: Tuple[int, int]) -> None:
+        """
+        Configure the dash/dot geometry used when style is "dashed" or "dotted".
+
+        Args:
+            style_type (Tuple[int, int]):
+                For "dashed" → (dash_length_px, gap_length_px).
+                For "dotted" → (circle_diameter_px, gap_length_px).
+                Triggers a chart redraw.
+        """
+        self.configure(style_type=style_type)
+
+    def configure_point_highlight(self, point_highlight: Literal["enabled", "disabled"]) -> None:
+        """
+        Enable or disable circular highlight markers drawn at each data point.
+
+        Args:
+            point_highlight (Literal["enabled", "disabled"]): "enabled" draws markers;
+                "disabled" hides them. Triggers a chart redraw.
+        """
+        self.configure(point_highlight=point_highlight)
+
+    def configure_point_highlight_size(self, point_highlight_size: int) -> None:
+        """
+        Configure the diameter of the circular highlight markers.
+
+        Args:
+            point_highlight_size (int): Diameter in pixels.
+                Has no visible effect when point_highlight is "disabled".
+                Triggers a chart redraw.
+        """
+        self.configure(point_highlight_size=point_highlight_size)
+
+    def configure_point_highlight_color(self, point_highlight_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the fill color of the circular highlight markers.
+
+        Args:
+            point_highlight_color (Union[Tuple[str, str], str]): A single hex color string
+                or a (light_mode_color, dark_mode_color) tuple.
+                Triggers a chart redraw.
+        """
+        self.configure(point_highlight_color=point_highlight_color)
+
+    def configure_fill(self, fill: Literal["enabled", "disabled"]) -> None:
+        """
+        Enable or disable the filled polygon drawn beneath the line.
+
+        Args:
+            fill (Literal["enabled", "disabled"]): "enabled" fills the area under the
+                line down to the x-axis; "disabled" draws only the line.
+                Triggers a chart redraw.
+        """
+        self.configure(fill=fill)
+
+    def configure_fill_color(self, fill_color: Union[Tuple[str, str], str]) -> None:
+        """
+        Configure the color of the filled polygon drawn beneath the line.
+
+        Args:
+            fill_color (Union[Tuple[str, str], str]): A single hex color string or a
+                (light_mode_color, dark_mode_color) tuple.
+                Has no visible effect when fill is "disabled".
+                Triggers a chart redraw.
+        """
+        self.configure(fill_color=fill_color)
+

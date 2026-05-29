@@ -105,6 +105,7 @@ linechart = ctkchart.CTkLineChart()
 | 方法                         | 描述                  | 支持的参数 / 必须的参数                                                                                                                    | 返回类型     | 
 |----------------------------|---------------------|----------------------------------------------------------------------------------------------------------------------------------|----------| 
 | configure                  | 更改 LineChart（折线图）属性 | 所有属性，除了 master                                                                                                                   | ``None`` | 
+| configure_<parameter>      | 更改特定的 LineChart 属性    | 特定的参数（例如：width: ``int``）                                                                                              | ``None`` | 
 | [show_data](#display-data) | 显示数据                | data: ``list``<br> line: ``ctkchart.CTkLine``                                                                                    | ``None`` | 
 | place                      | 放置 (place) 折线图      | x: ``int``<br>y: ``int``<br>rely: ``float or int``<br>relx: ``float or int``<br>anchor: ``str``                                  | ``None`` | 
 | pack                       | 放置 (pack) 折线图       | pady: ``int``<br>padx: ``int``<br> before: ``widget``<br> after: ``widget``<br>side: ``str``<br>anchor: ``str``                  | ``None`` | 
@@ -166,6 +167,7 @@ line = ctkchart.CTkLine()
 | 方法             | 描述       | 支持的参数                                    | 返回类型     | 
 |----------------|----------|------------------------------------------|----------| 
 | configure      | 更改折线图属性  | 所有属性，除了 master                           | ``None`` | 
+| configure_<parameter> | 更改特定的 Line（线条）属性 | 特定的参数（例如：size: ``int``）                 | ``None`` | 
 | cget           | 获取指定参数的值 | attribute_name: ``str`` \| "\_\_all\_\_" | ``any``  | 
 | reset          | 重置线对象    | -                                        | ``None`` | 
 | set_visible    | 改变线条的可见度 | state: ``bool``                          | ``None`` | 
