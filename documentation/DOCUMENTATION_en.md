@@ -106,6 +106,7 @@ linechart = ctkchart.CTkLineChart()
 | Method                     | Description                              | Supported / Required Parameters                                                                                                  | Return Type | 
 |----------------------------|------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|-------------| 
 | configure                  | Change LineChart attributes              | All attributes except for master                                                                                                 | ``None``    | 
+| configure_<parameter>      | Change specific LineChart attributes     | specific parameter (e.g., width: ``int``)                                                                                       | ``None``    | 
 | [show_data](#display-data) | Display data                             | data: ``list``<br> line: ``ctkchart.CTkLine``                                                                                    | ``None``    | 
 | place                      | Place LineChart                          | x: ``int``<br>y: ``int``<br>rely: ``float or int``<br>relx: ``float or int``<br>anchor: ``str``                                  | ``None``    | 
 | pack                       | Pack LineChart                           | pady: ``int``<br>padx: ``int``<br> before: ``widget``<br> after: ``widget``<br>side: ``str``<br>anchor: ``str``                  | ``None``    | 
@@ -168,6 +169,7 @@ line = ctkchart.CTkLine()
 | Method         | Description                              | Supported Parameters                       | Return Type | 
 |----------------|------------------------------------------|--------------------------------------------|-------------| 
 | configure      | Change LineChart attributes              | All attributes except for master           | ``None``    | 
+| configure_<parameter> | Change specific Line attributes          | specific parameter (e.g., size: ``int``)   | ``None``    | 
 | cget           | Get the value of the specified parameter | attribute_name: ``str`` \| "\_\_all\_\_"   | ``any``     | 
 | reset          | reset line object                        | -                                          | ``None``    | 
 | set_visible    | change the visibility of the line        | state: ``bool``                            | ``None``    | 

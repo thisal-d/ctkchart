@@ -1,6 +1,19 @@
 [![Chinese](https://img.shields.io/badge/Language-中文-red)](CHANGES_zh.md)
 
 
+## v2.2.0
+
+- ### New Methods Added to `CTkLineChart` Object
+    | Method Name                  | Description                                                | Parameters                               | Return Type      |
+    |------------------------------|------------------------------------------------------------|------------------------------------------|-----------------|
+    | `configure_<parameter>`      | Individually configure specific chart attributes without invoking the main `configure` method. Examples: `configure_width`, `configure_height`, `configure_bg_color`, etc. | Depends on parameter                     | `None`          |
+
+- ### New Methods Added to `CTkLine` Object
+    | Method Name                  | Description                                                | Parameters                               | Return Type      |
+    |------------------------------|------------------------------------------------------------|------------------------------------------|-----------------|
+    | `configure_<parameter>`      | Individually configure specific line attributes without invoking the main `configure` method. Examples: `configure_color`, `configure_size`, `configure_style`, etc. | Depends on parameter                     | `None`          |
+
+
 ## v2.1.7  
 
 - ### New Methods Added to `CTkLineChart` Object  
