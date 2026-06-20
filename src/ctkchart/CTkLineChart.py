@@ -1469,7 +1469,7 @@ class CTkLineChart:
                     line._CTkLine__y_end = (d / self.__y_axis_values_gap * self.__const_real_height)
                 line._CTkLine__y_end += (line._CTkLine__size / 2)
 
-                if round(line._CTkLine__x_end) > round(self.__real_width) and self.__real_width < self.__width * 5:
+                if round(line._CTkLine__x_end) >= round(self.__real_width) and self.__real_width <= self.__width * 5:
                     self.__place_x -= self.__x_axis_point_spacing
 
                     self.__output_canvas.place(
