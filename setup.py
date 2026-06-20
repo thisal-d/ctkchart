@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ctkchart',  # Replace with your package name
-    version='2.1.9',  # Replace with your package version
+    version='2.2.1',  # Replace with your package version
     author='Thisal-D',  # Replace with your name
     author_email='',  # Replace with your email
     description='Line-chart Widget for customtkinter, Python library for creating live updating line charts in CustomTkinter.',
